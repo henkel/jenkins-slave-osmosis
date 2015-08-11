@@ -1,8 +1,12 @@
 FROM evarga/jenkins-slave
+
 MAINTAINER Philipp Henkel <weltraumpilot@googlemail.com>
 
 
-# OSMOSIS
+RUN apt-get update
+
+
+# Osmosis
 
 RUN wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz 
 RUN mkdir osmosis
@@ -11,14 +15,15 @@ RUN rm osmosis-latest.tgz
 RUN chmod a+x osmosis/bin/osmosis
 
 
-# OSMOSIS Mapsforge Map Writer
+# Osmosis Mapsforge Map Writer
 
 RUN wget http://download.mapsforge.org/releases/0.5.1/mapsforge-map-writer/build/libs/mapsforge-map-writer-0.5.1.jar
 RUN mv mapsforge-map-writer-0.5.1.jar osmosis/lib/default/
 
-# Install python2.7 and python-pip
-RUN apt-get update && \
-    apt-get -y install python2.7 python-pip
+
+# Python
+
+RUN apt-get -y install python2.7 python-pip
 
 RUN pip install sh && \
     pip install logging && \
@@ -27,7 +32,7 @@ RUN pip install sh && \
 
 # Install phyghtmap
 
-RUN apt-get -y install  python-matplotlib  python-beautifulsoup python-numpy python-gdal
+RUN apt-get -y install python-matplotlib python-beautifulsoup python-numpy python-gdal
 
 RUN wget http://katze.tfiu.de/projects/phyghtmap/phyghtmap_1.73.orig.tar.gz
 RUN tar -xzf phyghtmap_1.73.orig.tar.gz
