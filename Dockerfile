@@ -4,18 +4,21 @@ MAINTAINER Philipp Henkel <weltraumpilot@googlemail.com>
 
 RUN apt-get update
 
-# Osmosis
+# Install git
+RUN apt-get -y install git
+
+# Install Osmosis
 RUN wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz 
 RUN mkdir osmosis
 RUN tar xvfz osmosis-latest.tgz --directory=osmosis
 RUN rm osmosis-latest.tgz
 RUN chmod a+x osmosis/bin/osmosis
 
-# Osmosis Mapsforge Map Writer
+# Install Osmosis Mapsforge Map Writer
 RUN wget http://download.mapsforge.org/releases/0.5.1/mapsforge-map-writer/build/libs/mapsforge-map-writer-0.5.1.jar
 RUN mv mapsforge-map-writer-0.5.1.jar osmosis/lib/default/
 
-# Python
+# Install Python
 RUN apt-get -y install python2.7 python-pip
 RUN pip install sh && \
     pip install logging && \
