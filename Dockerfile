@@ -8,15 +8,15 @@ RUN apt-get update
 RUN apt-get -y install git
 
 # Install Osmosis
-RUN wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-latest.tgz 
+RUN wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-0.44.1.tgz
 RUN mkdir osmosis
-RUN tar xvfz osmosis-latest.tgz --directory=osmosis
-RUN rm osmosis-latest.tgz
+RUN tar xvfz osmosis-0.44.1.tgz --directory=osmosis
+RUN rm osmosis-0.44.1.tgz
 RUN chmod a+x osmosis/bin/osmosis
 
 # Install Osmosis Mapsforge Map Writer
-RUN wget http://download.mapsforge.org/releases/0.5.1/mapsforge-map-writer/build/libs/mapsforge-map-writer-0.5.1.jar
-RUN mv mapsforge-map-writer-0.5.1.jar osmosis/lib/default/
+RUN wget http://download.mapsforge.org/releases/0.5.2/mapsforge-map-writer/build/libs/mapsforge-map-writer-0.5.2.jar
+RUN mv mapsforge-map-writer-0.5.2.jar osmosis/lib/default/
 
 # Install Python
 RUN apt-get -y install python2.7 python-pip
@@ -26,8 +26,8 @@ RUN pip install sh && \
 
 # Install phyghtmap
 RUN apt-get -y install python-matplotlib python-beautifulsoup python-numpy python-gdal
-RUN wget http://katze.tfiu.de/projects/phyghtmap/phyghtmap_1.73.orig.tar.gz
-RUN tar -xzf phyghtmap_1.73.orig.tar.gz
-RUN cd phyghtmap-1.73 && python setup.py install
-RUN rm phyghtmap_1.73.orig.tar.gz
-RUN rm -rf phyghtmap-1.73
+RUN wget http://katze.tfiu.de/projects/phyghtmap/phyghtmap_1.74.orig.tar.gz
+RUN tar -xzf phyghtmap_1.74.orig.tar.gz
+RUN cd phyghtmap-1.74 && python setup.py install
+RUN rm phyghtmap_1.74.orig.tar.gz
+RUN rm -rf phyghtmap-1.74
