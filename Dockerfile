@@ -15,7 +15,7 @@ RUN rm osmosis-0.44.1.tgz
 RUN chmod a+x osmosis/bin/osmosis
 
 # Install Osmosis Mapsforge Map Writer
-RUN wget http://download.mapsforge.org/releases/0.5.2/mapsforge-map-writer/build/libs/mapsforge-map-writer-0.5.2.jar
+RUN wget http://ci.mapsforge.org/job/0.5.2/lastSuccessfulBuild/artifact/mapsforge-map-writer/build/libs/mapsforge-map-writer-release-0.5.2.jar
 RUN mv mapsforge-map-writer-0.5.2.jar osmosis/lib/default/
 
 # Install Python
