@@ -2,6 +2,7 @@ FROM evarga/jenkins-slave
 
 MAINTAINER Philipp Henkel <weltraumpilot@googlemail.com>
 
+# Make sure the package repository is up to date.
 RUN apt-get update
 
 # Install git
@@ -16,7 +17,7 @@ RUN chmod a+x osmosis/bin/osmosis
 
 # Install Osmosis Mapsforge Map Writer
 RUN wget http://ci.mapsforge.org/job/0.5.2/lastSuccessfulBuild/artifact/mapsforge-map-writer/build/libs/mapsforge-map-writer-release-0.5.2.jar
-RUN mv mapsforge-map-writer-0.5.2.jar osmosis/lib/default/
+RUN mv mapsforge-map-writer-release-0.5.2.jar osmosis/lib/default/
 
 # Install Python
 RUN apt-get -y install python2.7 python-pip
