@@ -15,7 +15,8 @@ RUN tar xvfz osmosis-0.44.1.tgz --directory=osmosis
 RUN rm osmosis-0.44.1.tgz
 RUN chmod a+x osmosis/bin/osmosis
 ENV PATH /osmosis/bin:$PATH
-RUN echo "PATH=$PATH" >> /etc/environment
+RUN echo 'export PATH=$PATH:/osmosis/bin' > /etc/profile.d/osmosis.sh
+RUN chmod 775 /etc/profile.d/osmosis.sh
 
 # Install Osmosis Mapsforge Map Writer
 RUN wget http://ci.mapsforge.org/job/0.5.2/lastSuccessfulBuild/artifact/mapsforge-map-writer/build/libs/mapsforge-map-writer-release-0.5.2.jar
