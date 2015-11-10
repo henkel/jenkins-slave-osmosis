@@ -1,4 +1,4 @@
-FROM evarga/jenkins-slave
+FROM evarga/jenkins-slave:latest
 
 MAINTAINER Philipp Henkel <weltraumpilot@googlemail.com>
 
