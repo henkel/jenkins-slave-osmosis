@@ -1,9 +1,11 @@
 Docker image with osmosis, mapsforge-map-writer plugin and phyghtmap. The image can be used stand-alone or as a SSH based Jenkins slave. 
 
+
 # Osmosis
 Osmosis is a command line Java application for processing OSM data. The tool consists of pluggable components that can be chained to perform a larger operation. For example, it has components for reading/writing databases and files, deriving/applying changes to data sources, and sorting data.
 
 > [wiki.openstreetmap.org](http://wiki.openstreetmap.org/wiki/Osmosis)
+
 
 # How to use this image stand-alone
 
@@ -17,10 +19,11 @@ Now osmosis is ready to process OpenStreetMap data in directory /opt/osmosis.
 $ osmosis --rbf /opt/osmosis/germany-latest.osm.pbf --tee 1 --bounding-box left=8.30 bottom=48.86 right=8.59 top=49.03 --wx /opt/osmosis/karlsruhe.osm
 ```
 
-# How to use this image with Jenkins
-Jenkins can automatically pull the image and a launch a build slave using the Could feature.
 
-Add a new Docker Template to Jenkins' Docker Cloud
+# How to use this image with Jenkins
+Jenkins is able to automatically pull the image and launch the build slave using its Could feature.
+
+Add a new Docker Template to Jenkins' Docker Cloud:
 1. Docker Image: henkel/jenkins-slave-osmosis:latest
 2. Volumes: <your local path>:/opt/osmosis
 3. Labels: osmosis
