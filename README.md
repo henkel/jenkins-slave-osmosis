@@ -29,7 +29,7 @@ Add a new Docker Template to Jenkins' Docker Cloud:
 3. Labels: osmosis
 4. Usage: Only build jobs with label restrictions matching this node
 5. Launch Method: Docker SSH computer launcher
-6. Creditials: jenkins/jenkins
+6. Credentials: jenkins/jenkins
 
 Jenkins executes build scripts via a non-interactive SSH shell. You might want to load the environment explicitly at the beginning of your script so that the path to osmosis is properly configured.
 
