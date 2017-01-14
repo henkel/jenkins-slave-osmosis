@@ -3,9 +3,9 @@ FROM ubuntu:trusty
 MAINTAINER Philipp Henkel <weltraumpilot@googlemail.com>
 
 # Versions
-ENV OSMOSIS_VERSION 0.44.1
-ENV MAPSFORGE_VERSION 0.5.2
-ENV PHYGHTMAP_VERSION 1.74
+ENV OSMOSIS_VERSION 0.45
+ENV MAPSFORGE_VERSION 0.6.1
+ENV PHYGHTMAP_VERSION 1.80
 
 # Install a basic SSH server
 RUN apt-get update && apt-get install -y openssh-server
@@ -38,8 +38,8 @@ RUN echo 'export PATH=$PATH:/osmosis/bin' > /etc/profile.d/osmosis.sh
 RUN chmod 775 /etc/profile.d/osmosis.sh
 
 # Install Osmosis Mapsforge Map Writer
-RUN wget http://ci.mapsforge.org/job/$MAPSFORGE_VERSION/lastSuccessfulBuild/artifact/mapsforge-map-writer/build/libs/mapsforge-map-writer-release-$MAPSFORGE_VERSION.jar
-RUN mv mapsforge-map-writer-release-$MAPSFORGE_VERSION.jar osmosis/lib/default/
+RUN wget http://ci.mapsforge.org/job/$MAPSFORGE_VERSION/lastSuccessfulBuild/artifact/mapsforge-map-writer/build/libs/mapsforge-map-writer-$MAPSFORGE_VERSION-jar-with-dependencies.jar
+RUN mv mapsforge-map-writer-$MAPSFORGE_VERSION-jar-with-dependencies.jar osmosis/lib/default/
 
 # Install Python
 RUN apt-get update && apt-get -y install python2.7 python-pip

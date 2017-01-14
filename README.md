@@ -1,4 +1,4 @@
-Docker image with osmosis, mapsforge-map-writer plugin and phyghtmap. The image can be used stand-alone or as a SSH based Jenkins slave. 
+Docker container with the toolchain to create [mapsforge maps](https://github.com/mapsforge/mapsforge/blob/master/docs/Specification-Binary-Map-File.md) with osmosis, mapsforge-map-writer plugin and phyghtmap. The container can be used stand-alone or as a SSH based Jenkins slave. 
 
 
 # Osmosis
@@ -21,7 +21,7 @@ $ osmosis --rbf /opt/osmosis/germany-latest.osm.pbf --tee 1 --bounding-box left=
 
 
 # How to use this image with Jenkins
-Jenkins is able to automatically pull the image and launch the build slave using its Could feature.
+Jenkins is able to automatically pull the image and launch the build slave using its Cloud feature.
 
 Add a new Docker Template to Jenkins' Docker Cloud:
 1. Docker Image: henkel/jenkins-slave-osmosis:latest
@@ -37,3 +37,9 @@ Jenkins executes build scripts via a non-interactive SSH shell. You might want t
 #!/bin/bash
 . /etc/profile
 ```
+
+# License
+
+Copyright (C) 2015-2017 Philipp Henkel
+
+Licensed under the MIT License (MIT). See LICENSE file for more details.
