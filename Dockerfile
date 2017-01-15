@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM debian:latest
 
 MAINTAINER Philipp Henkel <weltraumpilot@googlemail.com>
 
@@ -7,16 +7,15 @@ ENV OSMOSIS_VERSION 0.45
 ENV MAPSFORGE_VERSION 0.6.1
 ENV PHYGHTMAP_VERSION 1.80
 
+RUN apt-get update
+
 # Install a basic SSH server
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get install -y openssh-server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
 
-# Standard SSH port
-EXPOSE 22
-
 # Install JDK 7 (latest edition)
-RUN apt-get update && apt-get install -y openjdk-7-jdk
+RUN apt-get install -y openjdk-7-jdk
 
 # Add user jenkins to the image
 RUN adduser --quiet jenkins
@@ -25,7 +24,10 @@ RUN adduser --quiet jenkins
 RUN echo "jenkins:jenkins" | chpasswd
 
 # Install git
-RUN apt-get update && apt-get -y install git
+RUN apt-get -y install git
+
+# Install wget
+RUN apt-get -y install wget
 
 # Install Osmosis
 RUN wget http://bretth.dev.openstreetmap.org/osmosis-build/osmosis-$OSMOSIS_VERSION.tgz
@@ -42,13 +44,13 @@ RUN wget http://ci.mapsforge.org/job/$MAPSFORGE_VERSION/lastSuccessfulBuild/arti
 RUN mv mapsforge-map-writer-$MAPSFORGE_VERSION-jar-with-dependencies.jar osmosis/lib/default/
 
 # Install Python
-RUN apt-get update && apt-get -y install python2.7 python-pip
+RUN apt-get -y install python2.7 python-pip
 RUN pip install sh && \
     pip install logging && \
     pip install setuptools
 
 # Install phyghtmap
-RUN apt-get update && apt-get -y install python-matplotlib python-beautifulsoup python-numpy python-gdal
+RUN apt-get -y install python-matplotlib python-beautifulsoup python-numpy python-gdal
 RUN wget http://katze.tfiu.de/projects/phyghtmap/phyghtmap_$PHYGHTMAP_VERSION.orig.tar.gz
 RUN tar -xzf phyghtmap_$PHYGHTMAP_VERSION.orig.tar.gz
 RUN cd phyghtmap-$PHYGHTMAP_VERSION && python setup.py install
@@ -58,5 +60,8 @@ RUN rm -rf phyghtmap-$PHYGHTMAP_VERSION
 # Clean out the apt-cache and cleaning out tmp
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Standard SSH port
+EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
