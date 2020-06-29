@@ -1,4 +1,4 @@
-Docker container with the toolchain to create [mapsforge maps](https://github.com/mapsforge/mapsforge/blob/master/docs/Specification-Binary-Map-File.md) with osmosis, mapsforge-map-writer plugin and phyghtmap. The container can be used stand-alone or as a SSH based Jenkins slave. 
+Docker container with the toolchain to create [mapsforge maps](https://github.com/mapsforge/mapsforge/blob/master/docs/Specification-Binary-Map-File.md) with osmosis, mapsforge-map-writer plugin and phyghtmap. The container can be used stand-alone or as a SSH based Jenkins agent. 
 
 
 ### Osmosis
@@ -11,7 +11,7 @@ Osmosis is a command line Java application for processing OSM data. The tool con
 
 The following docker command runs the image, maps the user's home directory into /opt/osmosis and opens an interactive shell. 
 ```console
-$ docker run --rm  -i -t -v ~:/opt/osmosis henkel/jenkins-slave-osmosis:latest bash
+$ docker run --rm  -i -t -v ~:/opt/osmosis henkel/jenkins-agent-osmosis:latest bash
 ```
 
 Now osmosis is ready to process OpenStreetMap data in directory /opt/osmosis.
@@ -20,11 +20,11 @@ $ osmosis --rbf /opt/osmosis/germany-latest.osm.pbf --tee 1 --bounding-box left=
 ```
 
 # How to use this image with Jenkins
-Jenkins is able to automatically pull the image and launch the build slave using its Cloud feature.
+Jenkins is able to automatically pull the image and launch the build agent using its Cloud feature.
 
 Add a new Docker Template to Jenkins' Docker Cloud:
 
-1. Docker Image: henkel/jenkins-slave-osmosis:latest
+1. Docker Image: henkel/jenkins-agent-osmosis:latest
 2. Volumes: *your local path*:/opt/osmosis
 3. Labels: osmosis
 4. Usage: Only build jobs with label restrictions matching this node
